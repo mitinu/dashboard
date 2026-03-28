@@ -266,7 +266,7 @@ export default {
   .content{
     border: 1px solid #4b4b4b;
     background-color: #171620;
-    border-radius: 3%;
+    border-radius: 20px;
     min-width: 0;
   }
 }
