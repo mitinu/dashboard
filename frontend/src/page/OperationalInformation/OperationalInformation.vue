@@ -5,9 +5,9 @@
         :appeals="dataAppeal.appeals"
     />
     <performingDiscipline
-        :dateRange="dataAssignmentTest.dateRange"
-        :assignments="dataAssignmentTest.assignments"
-        :lengths="dataAssignmentTest.lengths"
+        :dateRange="dataAssignment.dateRange"
+        :assignments="dataAssignment.assignments"
+        :lengths="dataAssignment.lengths"
     />
   </div>
   </template>

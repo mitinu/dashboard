@@ -1,0 +1,8 @@
+// рудимент от попытки унифицировать addTable
+
+//package domain
+//
+//type TableDomain interface {
+//	DeleteByIdTable(idTable int64) (int64, error)
+//	Creates(entities any) []error
+//}
