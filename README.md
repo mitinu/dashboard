@@ -127,7 +127,6 @@ CRON_TIME=09:00 INTERVAL_DAYS_READS=1	каждый день в 9:00
 CRON_TIME=18:30 INTERVAL_DAYS_READS=2	каждые 2 дня в 18:30
 
 
-```markdown
 ## 🧪 Режимы работы Gin
 
 | Режим | Описание |
@@ -145,5 +144,5 @@ CRON_TIME=18:30 INTERVAL_DAYS_READS=2	каждые 2 дня в 18:30
 | Порт 8080 уже занят | Измените `APP_PORT` в `.env` на другой, например 8081 |
 | Не удается подключиться к БД | Проверьте что PostgreSQL запущен: `sudo systemctl start postgresql` |
 | Excel файл не читается | Убедитесь что путь `PATH_EXCEL` существует и файл имеет права на чтение |
-```
+
 
