@@ -24,6 +24,7 @@
 
 
 ## 📁 Структура проекта
+```markdown
 project-root/
 ├── backend/
 │ └── src/
@@ -50,7 +51,7 @@ project-root/
 │ └── diagram/ # Модуль диаграмм
 │ └── page/
 │ └── component/ # Компоненты страниц диаграмм
-
+```
 ## 🗄 Схема базы данных
 ![alt text](image-2.png)
 
