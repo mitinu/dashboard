@@ -84,7 +84,7 @@ frontend/vite.config.js
 
 
 
-.env
+```.env
 # Gin Mode
 # debug, release, test
 GIN_MODE=           debug
@@ -110,7 +110,7 @@ DB_USER=            postgres
 DB_PASSWORD=        1011
 DB_NAME=            dashboard
 DB_SSL_MODE=        disable
-
+```
 
 
 ⏰ Автоматическое чтение Excel
