@@ -18,8 +18,8 @@
       <div class="container fl1">
         <myTable
             class="myTable"
-            :headerTable="dataTable.header"
-            :bodyTable="dataTable.body"
+            :headerTable="headerTable"
+            :bodyTable="tableRows"
         />
       </div>
     </div>
@@ -46,42 +46,47 @@ export default {
   },
   data(){
     return{
-      dataTable:{
-        header:[
-          {
-            key:"number",
-            value:"№",
-            width:"1fr"
-          },
-          {
-            key:"topic",
-            value:"тема",
-            width:"2fr"
-          },
-          {
-            key:"count",
-            value:"кол-во",
-            width:"1fr"
-          },
-        ],
-        body:{}
-      }
+      headerTable:[
+        {
+          key:"number",
+          value:"№",
+          width:"1fr"
+        },
+        {
+          key:"topic",
+          value:"тема",
+          width:"2fr"
+        },
+        {
+          key:"count",
+          value:"кол-во",
+          width:"1fr"
+        },
+      ],
     }
   },
-  mounted() {
-    Object.entries(this.appeals)
-      .filter(([key]) => key !== 'length')
-      .map(([key, value]) => ({ key, ...value }))
-      .sort((a, b) => b.value - a.value)
-      .forEach((item, index) => {
-        this.dataTable.body[index+1] = {
-          id:index+1,
-          number:index+1,
-          count:item.value,
-          topic:item.title,
-        }
-      });
-  }
+  computed: {
+    /**
+     * Преобразует объект обращений (appeals) в отсортированный массив для таблицы.
+     * Исключает техническое свойство 'length', сортирует по убыванию количества
+     * и добавляет порядковую нумерацию.
+     * */
+    tableRows() {
+      // Проверка на наличие данных, чтобы избежать ошибок при рендеринге
+      if (!this.appeals) return [];
+
+      return Object.entries(this.appeals)
+          .filter(([key]) => key !== 'length')
+          .map(([key, value]) => ({ key, ...value }))
+          .sort((a, b) => b.value - a.value)
+          .map((item, index) => ({
+            id: index + 1,
+            number: index + 1,
+            count: item.value,
+            topic: item.title,
+          }));
+    }
+  },
 }
 </script>
 
