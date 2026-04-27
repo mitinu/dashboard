@@ -10,4 +10,11 @@ const (
 	DeleteByIdTableAverageSalary = `
 		DELETE FROM public.average_salary WHERE id_table = $1
 	`
+
+	GetAverageSalaryByDateRange = `
+       SELECT id, date, value, id_table 
+       FROM public.average_salary 
+       WHERE date BETWEEN $1 AND $2
+       ORDER BY date ASC
+    `
 )

@@ -58,3 +58,23 @@ func (r *LaborMarketRepository) DeleteByIdTable(idTable int64) (int64, error) {
 	log.Printf("Удалено %d записей с id_table=%d", rowsAffected, idTable)
 	return rowsAffected, nil
 }
+
+func (r *LaborMarketRepository) GetLaborMarketByDateRange(startDate, endDate string) ([]DTO.LaborMarket, error) {
+	rows, err := r.DB.Query(SQL.GetLaborMarketByDateRange, startDate, endDate)
+	if err != nil {
+		return nil, fmt.Errorf("ошибка при поиске в диапазоне дат: %w", err)
+	}
+	defer rows.Close()
+
+	var results []DTO.LaborMarket
+	for rows.Next() {
+		var lm DTO.LaborMarket
+		err := rows.Scan(&lm.ID, &lm.Date, &lm.Unemployed, &lm.Employed, &lm.IdTable)
+		if err != nil {
+			return nil, err
+		}
+		results = append(results, lm)
+	}
+
+	return results, nil
+}

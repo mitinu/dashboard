@@ -59,3 +59,21 @@ func (r *AverageSalaryRepository) DeleteByIdTable(idTable int64) (int64, error) 
 	log.Printf("Удалено %d записей с id_table=%d", rowsAffected, idTable)
 	return rowsAffected, nil
 }
+
+func (r *AverageSalaryRepository) GetByDateRange(startDate, endDate string) ([]DTO.AverageSalary, error) {
+	rows, err := r.DB.Query(SQL.GetAverageSalaryByDateRange, startDate, endDate)
+	if err != nil {
+		return nil, fmt.Errorf("ошибка при получении зарплат: %w", err)
+	}
+	defer rows.Close()
+
+	var results []DTO.AverageSalary
+	for rows.Next() {
+		var s DTO.AverageSalary
+		if err := rows.Scan(&s.ID, &s.Date, &s.Value, &s.IdTable); err != nil {
+			return nil, err
+		}
+		results = append(results, s)
+	}
+	return results, nil
+}

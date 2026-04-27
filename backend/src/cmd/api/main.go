@@ -64,7 +64,11 @@ func main() {
 	excelService.CheckHashes(cfg.PathExcel)
 	logger.Debug.Println("testEnd")
 
-	r := router.SetupRouter()
+	r := router.SetupRouter(router.Repositories{
+		LaborMarket:   postgres.NewLaborMarketRepository(db),
+		AverageSalary: postgres.NewAverageSalaryRepository(db),
+	})
+
 	srv := &http.Server{
 		Addr:           ":" + cfg.AppPort,
 		Handler:        r,
