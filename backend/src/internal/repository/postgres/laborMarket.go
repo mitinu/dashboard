@@ -3,6 +3,7 @@ package postgres
 import (
 	"backend/src/internal/DTO"
 	"backend/src/internal/domain"
+	"backend/src/internal/repository/SQL"
 	"database/sql"
 	"fmt"
 	"log"
@@ -19,7 +20,7 @@ func NewLaborMarketRepository(Postgres *PostgresDB) domain.LaborMarket {
 // Create - создание одной записи
 func (r *LaborMarketRepository) Create(laborMarket *DTO.LaborMarket) error {
 	var id int64
-	err := r.DB.QueryRow(DTO.CreateLaborMarket, laborMarket.Date, laborMarket.Unemployed, laborMarket.Employed, laborMarket.IdTable).Scan(&id)
+	err := r.DB.QueryRow(SQL.CreateLaborMarket, laborMarket.Date, laborMarket.Unemployed, laborMarket.Employed, laborMarket.IdTable).Scan(&id)
 	if err != nil {
 		log.Printf("Ошибка при вставке записи: %v", err)
 		return fmt.Errorf("не удалось создать запись: %w", err)
@@ -43,7 +44,7 @@ func (r *LaborMarketRepository) Creates(laborMarkets *[]DTO.LaborMarket) []error
 
 // DeleteByIdTable - удаление всех записей по id_table, возвращает количество удаленных записей
 func (r *LaborMarketRepository) DeleteByIdTable(idTable int64) (int64, error) {
-	result, err := r.DB.Exec(DTO.DeleteByIdTableLaborMarket, idTable)
+	result, err := r.DB.Exec(SQL.DeleteByIdTableLaborMarket, idTable)
 	if err != nil {
 		log.Printf("Ошибка при удалении записей с id_table=%d: %v", idTable, err)
 		return 0, fmt.Errorf("не удалось удалить записи: %w", err)

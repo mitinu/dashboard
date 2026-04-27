@@ -3,6 +3,7 @@ package postgres
 import (
 	"backend/src/internal/DTO"
 	"backend/src/internal/domain"
+	"backend/src/internal/repository/SQL"
 	"database/sql"
 	"fmt"
 )
@@ -19,7 +20,7 @@ func (r *ExcelInfoRepository) GetByName(name string) (*DTO.ExcelInfo, error) {
 	// Здесь пишем РЕАЛЬНЫЙ SQL запрос
 	var excelInfo DTO.ExcelInfo
 
-	err := r.DB.QueryRow(DTO.GetByNameExcelInfo, name).Scan(
+	err := r.DB.QueryRow(SQL.GetByNameExcelInfo, name).Scan(
 		&excelInfo.ID,
 		&excelInfo.IdType,
 		&excelInfo.Name,
@@ -37,7 +38,7 @@ func (r *ExcelInfoRepository) GetByName(name string) (*DTO.ExcelInfo, error) {
 }
 
 func (r *ExcelInfoRepository) CreateOrUpdate(file *DTO.ExcelInfo) error {
-	err := r.DB.QueryRow(DTO.CreateOrUpdateExcelInfo, file.Name, file.Hash, file.IdType).Scan(&file.ID)
+	err := r.DB.QueryRow(SQL.CreateOrUpdateExcelInfo, file.Name, file.Hash, file.IdType).Scan(&file.ID)
 	if err != nil {
 		return err
 	}

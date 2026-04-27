@@ -1,8 +1,8 @@
 package postgres
 
 import (
-	"backend/src/internal/DTO"
 	"backend/src/internal/domain"
+	"backend/src/internal/repository/SQL"
 	"database/sql"
 	"errors"
 	"fmt"
@@ -18,7 +18,7 @@ func NewTypeExcelInfoRepository(Postgres *PostgresDB) domain.TypeExcelInfo {
 
 func (r *TypeExcelInfoRepository) GetIdByTitle(title string) (int64, error) {
 	var id int64
-	err := r.DB.QueryRow(DTO.GetIdByTitleTypeExcelInfo, title).Scan(&id)
+	err := r.DB.QueryRow(SQL.GetIdByTitleTypeExcelInfo, title).Scan(&id)
 	if err != nil {
 		if errors.Is(err, sql.ErrNoRows) {
 			return 0, fmt.Errorf("тип Excel файла с названием '%s' не найден: %w", title, err)

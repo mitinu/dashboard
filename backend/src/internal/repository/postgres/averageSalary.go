@@ -3,6 +3,7 @@ package postgres
 import (
 	"backend/src/internal/DTO"
 	"backend/src/internal/domain"
+	"backend/src/internal/repository/SQL"
 	"database/sql"
 	"fmt"
 	"log"
@@ -19,7 +20,7 @@ func NewAverageSalaryRepository(Postgres *PostgresDB) domain.AverageSalary {
 // Create - создание одной записи
 func (r *AverageSalaryRepository) Create(averageSalary *DTO.AverageSalary) error {
 	var id int64
-	err := r.DB.QueryRow(DTO.CreateAverageSalary, averageSalary.Date, averageSalary.Value, averageSalary.IdTable).Scan(&id)
+	err := r.DB.QueryRow(SQL.CreateAverageSalary, averageSalary.Date, averageSalary.Value, averageSalary.IdTable).Scan(&id)
 	if err != nil {
 		log.Printf("Ошибка при вставке записи: %v", err)
 		return fmt.Errorf("не удалось создать запись: %w", err)
@@ -44,7 +45,7 @@ func (r *AverageSalaryRepository) Creates(averagesSalary *[]DTO.AverageSalary) [
 
 // DeleteByIdTable - удаление всех записей по id_table, возвращает количество удаленных записей
 func (r *AverageSalaryRepository) DeleteByIdTable(idTable int64) (int64, error) {
-	result, err := r.DB.Exec(DTO.DeleteByIdTableAverageSalary, idTable)
+	result, err := r.DB.Exec(SQL.DeleteByIdTableAverageSalary, idTable)
 	if err != nil {
 		log.Printf("Ошибка при удалении записей с id_table=%d: %v", idTable, err)
 		return 0, fmt.Errorf("не удалось удалить записи: %w", err)

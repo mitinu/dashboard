@@ -3,6 +3,7 @@ package postgres
 import (
 	"backend/src/internal/DTO"
 	"backend/src/internal/domain"
+	"backend/src/internal/repository/SQL"
 	"database/sql"
 	"fmt"
 )
@@ -16,7 +17,7 @@ func NewCpiRepository(Postgres *PostgresDB) domain.CPI {
 }
 
 func (r *CpiRepository) Create(cpi *DTO.CPI) error {
-	err := r.DB.QueryRow(DTO.CreateCPI, cpi.Date, cpi.Value, cpi.IdTable).Scan(&cpi.ID)
+	err := r.DB.QueryRow(SQL.CreateCPI, cpi.Date, cpi.Value, cpi.IdTable).Scan(&cpi.ID)
 	if err != nil {
 		return fmt.Errorf("failed to insert CPI: %w", err)
 	}
@@ -35,7 +36,7 @@ func (r *CpiRepository) Creates(multipleCpi *[]DTO.CPI) []error {
 }
 
 func (r *CpiRepository) DeleteByIdTable(idTable int64) (int64, error) {
-	result, err := r.DB.Exec(DTO.DeleteByIdTableCPI, idTable)
+	result, err := r.DB.Exec(SQL.DeleteByIdTableCPI, idTable)
 	if err != nil {
 		return 0, fmt.Errorf("ошибка при удалении записей: %w", err)
 	}
