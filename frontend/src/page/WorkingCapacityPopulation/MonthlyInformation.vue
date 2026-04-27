@@ -109,7 +109,7 @@ export default {
 
       datasetAverageSalaryTest: {
         chartColor:{
-          title: "уровень безработицы %",
+          title: "",
           color: "#b49cd0"
         },
         chart: {
