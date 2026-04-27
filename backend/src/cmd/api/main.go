@@ -53,7 +53,7 @@ func main() {
 
 	_, err = c.AddFunc(cronSpec, func() { excelService.CheckHashes(cfg.PathExcel) })
 	if err != nil {
-		log.Fatalf("Ошибка при добавлении задачи в cron: %v", err)
+		logger.Error.Fatalf("Ошибка при добавлении задачи в cron: %v", err)
 	}
 	logger.Info.Printf("чтение excel каждые %s дней в %s", cfg.IntervalDaysReads, cfg.CronTime)
 
