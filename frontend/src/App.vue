@@ -3,7 +3,9 @@
     <main-header
         :title="titleHeader"
     />
-    <main-body/>
+    <main-body
+      @setTitleHeader="setTitleHeader"
+    />
   </div>
 </template>
 
@@ -18,7 +20,12 @@ export default {
   },
   data(){
     return{
-      titleHeader:"реализация национальных проектов",
+      titleHeader:"",
+    }
+  },
+  methods:{
+    setTitleHeader(title){
+      this.titleHeader = title
     }
   }
 }

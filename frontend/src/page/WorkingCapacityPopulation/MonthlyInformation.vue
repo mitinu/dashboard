@@ -42,6 +42,7 @@ export default {
   data(){
     return{
       title: "Ежемесячная информация",
+      titleHeader: "реализация национальных проектов",
 
       datasetUnemploymentTest: {
         histogramColor:{
@@ -246,6 +247,7 @@ export default {
   },
   mounted() {
     this.$emit("setTitleMain", this.title)
+    this.$emit("setTitleHeader", this.titleHeader)
     this.$emit("setVisibilityButtonReturnMain", false)
   },
 

@@ -13,7 +13,8 @@
       </div>
     </div>
     <router-view
-        @setTitleMain="setTitle"
+        @setTitleMain="setTitleMain"
+        @setTitleHeader="setTitleHeader"
         @setVisibilityButtonReturnMain="setVisibilityButtonReturn"
     />
   </div>
@@ -33,8 +34,11 @@ export default {
     }
   },
   methods:{
-    setTitle(title){
+    setTitleMain(title){
       this.title = title
+    },
+    setTitleHeader(title){
+      this.$emit("setTitleHeader", title)
     },
     setVisibilityButtonReturn(status){
       this.visibilityButtonReturn = status

@@ -24,6 +24,7 @@ export default {
   data(){
     return{
       title: "оперативные сведения",
+      titleHeader: "реализация национальных проектов",
 
       dataAppealTest: {
         dateRange: {
@@ -139,6 +140,7 @@ export default {
   },
   mounted() {
     this.$emit("setTitleMain", this.title)
+    this.$emit("setTitleHeader", this.titleHeader)
     this.$emit("setVisibilityButtonReturnMain", false)
   },
 }
