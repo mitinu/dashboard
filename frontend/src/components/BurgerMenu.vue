@@ -5,6 +5,7 @@
   />
   <router-link to="/operationalInformation">оперативные сведения</router-link>
   <router-link to="/monthlyInformation">Ежемесячная информация</router-link>
+  <router-link to="/registration">регистрация</router-link>
 </div>
 </template>
 

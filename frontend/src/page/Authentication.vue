@@ -75,7 +75,7 @@ export default {
 .error-text {
   color: #ff4d4d;
   font-size: 14px;
-  margin-top: -15px; /* Чтобы текст был ближе к инпуту */
+  margin-top: -15px;
   align-self: flex-start;
 }
 .authentication{
