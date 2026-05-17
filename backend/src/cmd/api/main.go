@@ -1,21 +1,17 @@
 package main
 
 import (
-	"backend/src/internal/application/excel"
+	"backend/src/internal/application"
 	"backend/src/internal/config"
 	"backend/src/internal/repository/postgres"
 	"backend/src/internal/router"
 	"backend/src/pkg/logger"
 	"context"
-	"fmt"
 	"log"
 	"net/http"
 	"os"
 	"os/signal"
-	"strings"
 	"syscall"
-
-	"github.com/robfig/cron/v3"
 )
 
 func main() {
@@ -31,38 +27,12 @@ func main() {
 	}
 	defer db.Close()
 
-	excelInfoRepo := postgres.NewExcelInfoRepository(db)
-	typeExcelInfoRepo := postgres.NewTypeExcelInfoRepository(db)
-	cpiRepo := postgres.NewCpiRepository(db)
-	laborMarketRepo := postgres.NewLaborMarketRepository(db)
-	averageSalaryRepo := postgres.NewAverageSalaryRepository(db)
-
-	// Создание сервиса
-	excelService := &excel.ExcelService{
-		ExcelInfo:     excelInfoRepo,
-		TypeExcelInfo: typeExcelInfoRepo,
-		CPI:           cpiRepo,
-		LaborMarket:   laborMarketRepo,
-		AverageSalary: averageSalaryRepo,
-	}
-
-	c := cron.New(cron.WithSeconds())
-	parts := strings.Split(cfg.CronTime, ":")
-	hour, min := parts[0], parts[1]
-	cronSpec := fmt.Sprintf("0 %s %s */%s * *", min, hour, cfg.IntervalDaysReads)
-
-	_, err = c.AddFunc(cronSpec, func() { excelService.CheckHashes(cfg.PathExcel) })
+	c, err := application.PlannerInit(db, cfg)
 	if err != nil {
 		logger.Error.Fatalf("Ошибка при добавлении задачи в cron: %v", err)
 	}
-	logger.Info.Printf("чтение excel каждые %s дней в %s", cfg.IntervalDaysReads, cfg.CronTime)
-
-	c.Start() // Запуск планировщика
+	application.PlannerStart(c, cfg)
 	defer c.Stop()
-
-	logger.Debug.Println("testStart")
-	excelService.CheckHashes(cfg.PathExcel)
-	logger.Debug.Println("testEnd")
 
 	r := router.SetupRouter(router.Repositories{
 		LaborMarket:   postgres.NewLaborMarketRepository(db),

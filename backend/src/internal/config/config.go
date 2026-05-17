@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"log"
 	"os"
+	"strconv"
 	"time"
 
 	"github.com/gin-gonic/gin"
@@ -24,7 +25,7 @@ type Config struct {
 	Server  ServerConfig
 	// Reading
 	PathExcel         string
-	IntervalDaysReads string
+	IntervalDaysReads int
 	CronTime          string
 	// Database
 	DBHost     string
@@ -46,7 +47,7 @@ func Load() (*Config, error) {
 		AppPort: getEnv("APP_PORT", "8080"),
 
 		PathExcel:         getEnv("PATH_EXCEL", "resource/excel"),
-		IntervalDaysReads: getEnv("INTERVAL_DAYS_READS", "1"),
+		IntervalDaysReads: getIntEnv("INTERVAL_DAYS_READS", 1),
 		CronTime:          getEnv("CRON_TIME", "00:00"),
 		// Database
 		DBHost:     getEnv("DB_HOST", "localhost"),
@@ -56,7 +57,6 @@ func Load() (*Config, error) {
 		DBName:     getEnv("DB_NAME", "postgres"),
 		DBSslMode:  getEnv("DB_SSL_MODE", "disable"),
 	}
-
 	// Настройка таймаутов сервера
 	cfg.Server = ServerConfig{
 		ReadTimeout:     getDurationEnv("SERVER_READ_TIMEOUT", 15*time.Second),
@@ -102,6 +102,17 @@ func getDurationEnv(key string, defaultValue time.Duration) time.Duration {
 			return duration
 		}
 		log.Printf("WARN: Invalid duration format for %s, using default: %v", key, defaultValue)
+	}
+	return defaultValue
+}
+
+func getIntEnv(key string, defaultValue int) int {
+	if value := os.Getenv(key); value != "" {
+		intValue, err := strconv.Atoi(value)
+		if err == nil {
+			return intValue
+		}
+		log.Printf("WARN: Invalid int format for %s, using default: %d", key, defaultValue)
 	}
 	return defaultValue
 }
