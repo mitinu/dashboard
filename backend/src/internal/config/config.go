@@ -18,6 +18,13 @@ type ServerConfig struct {
 	IdleTimeout     time.Duration
 	ShutdownTimeout time.Duration
 }
+type Argon2Config struct {
+	Memory      uint32 //MB
+	Iterations  uint32
+	Parallelism uint8
+	SaltLength  uint32
+	KeyLength   uint32
+}
 
 type Config struct {
 	GinMode string
@@ -34,6 +41,13 @@ type Config struct {
 	DBPassword string
 	DBName     string
 	DBSslMode  string
+	// Hash
+	Argon2Config Argon2Config
+	Pepper       string
+	// Superadmin
+	Login           string
+	Password        string
+	TitleSadminInDB string
 }
 
 func Load() (*Config, error) {
@@ -56,6 +70,12 @@ func Load() (*Config, error) {
 		DBPassword: getEnv("DB_PASSWORD", "password"),
 		DBName:     getEnv("DB_NAME", "postgres"),
 		DBSslMode:  getEnv("DB_SSL_MODE", "disable"),
+		// Hash
+		Pepper: getEnv("PEPPER", "pizze"),
+		// Superadmin
+		Login:           getEnv("LOGIN", "root"),
+		Password:        getEnv("PASSWORD", "root"),
+		TitleSadminInDB: getEnv("TITLESADMININDB", "суперадмин"),
 	}
 	// Настройка таймаутов сервера
 	cfg.Server = ServerConfig{
@@ -63,6 +83,13 @@ func Load() (*Config, error) {
 		WriteTimeout:    getDurationEnv("SERVER_WRITE_TIMEOUT", 15*time.Second),
 		IdleTimeout:     getDurationEnv("SERVER_IDLE_TIMEOUT", 60*time.Second),
 		ShutdownTimeout: getDurationEnv("SERVER_SHUTDOWN_TIMEOUT", 10*time.Second),
+	}
+	cfg.Argon2Config = Argon2Config{
+		Memory:      uint32(getIntEnv("MEMORY", 64) * 1024),
+		Iterations:  uint32(getIntEnv("ITERATIONS", 3)),
+		Parallelism: uint8(getIntEnv("PARALLELISM", 4)),
+		SaltLength:  uint32(getIntEnv("SALTLENGTH", 16)),
+		KeyLength:   uint32(getIntEnv("KEYLENGTH", 32)),
 	}
 
 	// Устанавливаем режим Gin после загрузки конфигурации

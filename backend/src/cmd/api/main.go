@@ -27,6 +27,8 @@ func main() {
 	}
 	defer db.Close()
 
+	application.CreateSuperadmin(cfg, db)
+
 	c, err := application.PlannerInit(db, cfg)
 	if err != nil {
 		logger.Error.Fatalf("Ошибка при добавлении задачи в cron: %v", err)
