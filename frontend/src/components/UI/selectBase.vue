@@ -4,7 +4,10 @@
       :class="{ 'has-placeholder': !modelValue && placeholder }"
       :value="modelValue"
       @change="$emit('update:modelValue', $event.target.value)"
-      :style="{backgroundColor: themeStore.getColor4}"
+      :style="{
+        backgroundColor: themeStore.getColor4,
+        color: themeStore.getColorText
+      }"
   >
     <option v-if="placeholder" value="" disabled selected hidden>{{ placeholder }}</option>
     <option
@@ -44,7 +47,6 @@ export default {
   Width: 395px;
   Height: 50px;
   border-radius: 20px;
-  color: #FFFFFFCC;
   font-size: 20px;
   font-weight: 500;
   padding-left: 20px;

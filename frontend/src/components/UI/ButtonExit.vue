@@ -1,16 +1,29 @@
 <template>
   <div>
-    <button class="buttonExit"><exit-right/></button>
+    <button
+        class="buttonExit"
+        :style="{backgroundColor: themeStore.getColor4}"
+    >
+      <exit-right
+          :color="themeStore.getColorText"
+      />
+    </button>
   </div>
 </template>
 
 <script>
 import exitRight from "@/components/icons/ExitRight.vue";
+import {useThemeStore} from "@/stores/theme.js";
+
 export default {
   name: "buttonExit",
   components: {
     exitRight
-  }
+  },
+  setup() {
+    const themeStore = useThemeStore();
+    return { themeStore };
+  },
 }
 </script>
 
