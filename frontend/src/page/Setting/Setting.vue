@@ -42,6 +42,7 @@ export default {
     this.$emit("setHeader", this.header)
   }
 }
+// TODO добавить изменение размера h2, h3, span
 </script>
 
 <style scoped>
