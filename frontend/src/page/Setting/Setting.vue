@@ -33,8 +33,8 @@ export default {
       } else {
         store.setBackgroundMain("#F0F8FFFF");
         store.setColorText("#0b0b10");
-        store.setColor3("#ffffff");
-        store.setColor4("#cddbff");
+        store.setColor3("#E8E6F5");
+        store.setColor4("#D0D0E0");
       }
     }
   },

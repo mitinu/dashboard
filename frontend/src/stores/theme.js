@@ -5,8 +5,8 @@ export const useThemeStore = defineStore('theme', () => {
     // state (данные)
     const backgroundMain = ref("#f7f9ff")
     const colorText = ref("#0b0b10")
-    const color3 = ref("#f8f9fd")
-    const color4 = ref("#AFDAFC")
+    const color3 = ref("#E8E6F5")
+    const color4 = ref("#D0D0E0")
 
 
     // getters (вычисляемые свойства)
