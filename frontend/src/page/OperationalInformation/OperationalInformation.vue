@@ -23,8 +23,8 @@ export default {
   },
   data(){
     return{
-      title: "оперативные сведения",
-      titleHeader: "реализация национальных проектов",
+      title: "Оперативные сведения",
+      titleHeader: "Реализация национальных проектов",
 
       dataAppealTest: {
         dateRange: {

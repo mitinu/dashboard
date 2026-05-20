@@ -7,10 +7,16 @@
       @input="$emit('update:modelValue', $event.target.value)"
       :list="list"
       @change="emitChange"
+      :style="{
+        backgroundColor: themeStore.getColor4,
+        color: themeStore.getColorText
+      }"
   >
 </template>
 
 <script>
+import { useThemeStore } from "@/stores/theme";
+
 export default{
   name:"inputTextBase",
   props:{
@@ -24,6 +30,10 @@ export default{
       type: String
     }
   },
+  setup() {
+    const themeStore = useThemeStore();
+    return { themeStore };
+  },
   methods:{
     emitChange(){
       this.$emit("change")
@@ -34,7 +44,6 @@ export default{
 
 <style>
 .inputTextBase{
-  background-color: #2f2f40;
   Width: 375px;
   Height: 50px;
   border-radius: 20px;

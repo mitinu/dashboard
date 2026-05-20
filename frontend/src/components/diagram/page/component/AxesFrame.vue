@@ -171,7 +171,6 @@ export default {
   }
   .YAxis{
     height: 100%;
-    background-color: #171620;
     .items{
       height: calc(100% - 35px);
       display: flex;

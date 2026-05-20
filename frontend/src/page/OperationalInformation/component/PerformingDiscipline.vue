@@ -1,7 +1,7 @@
 <template>
-  <div class="citizensAppeal">
+  <div class="citizensAppeal"  :style="{backgroundColor: themeStore.getColor3}">
     <header-information-block
-        title="исполнительская дисциплина"
+        title="Исполнительская дисциплина"
         :dateRange="dateRange"
     />
     <div class="body">
@@ -9,7 +9,7 @@
         <div><span>поручение</span></div>
         <div>
           <countMessage
-            color="#ffffff"
+            :color="themeStore.getColorText"
             :count="lengths.all"
             title="Всего"
           />
@@ -46,6 +46,7 @@ import HeaderInformationBlock from "@/page/OperationalInformation/component/Head
 import MessageIcon from "@/components/icons/MessageIcon.vue";
 import MyTable from "@/components/UI/MyTable.vue";
 import CountMessage from "@/page/OperationalInformation/component/CountMessage.vue";
+import { useThemeStore } from "@/stores/theme";
 
 export default {
   name: "performingDiscipline",
@@ -59,6 +60,10 @@ export default {
     dateRange:{type: Object},
     assignments:{type: Array},
     lengths:{type: Object}
+  },
+  setup() {
+    const themeStore = useThemeStore();
+    return { themeStore };
   },
   data(){
     return{
@@ -113,7 +118,6 @@ export default {
 
 <style scoped>
 .citizensAppeal{
-  background-color: #171620;
   border-radius: 5%;
   border: 1px solid #4b4b4b;
   display: flex;

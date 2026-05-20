@@ -1,6 +1,6 @@
 <template>
   <div class="registration">
-    <div class="container">
+    <div class="container" :style="{backgroundColor: themeStore.getColor3}">
       <h1>Регистрация</h1>
       <div class="inputs">
         <div class="field">
@@ -13,6 +13,7 @@
 
         <div class="field">
           <SelectBase
+              placeholder="Уровень доступа"
               :options="form.accessStatus"
               v-model="form.levelAccess"
           />
@@ -46,6 +47,7 @@
 import inputTextBase from "@/components/UI/InputTextBase.vue"
 import buttonBase from "@/components/UI/ButtonBase.vue";
 import SelectBase from "@/components/UI/selectBase.vue";
+import { useThemeStore } from "@/stores/theme";
 
 export default {
   name: "Registration",
@@ -54,8 +56,13 @@ export default {
     inputTextBase,
     buttonBase
   },
+  setup() {
+    const themeStore = useThemeStore();
+    return { themeStore };
+  },
   data() {
     return {
+      titleHeader: "Регистрация новых пользователей",
       form: {
         login: "",
         password: "",
@@ -94,7 +101,12 @@ export default {
         this.$emit("submitRegistration");
       }
     }
-  }
+  },
+  mounted() {
+    this.$emit("setTitleMain", "")
+    this.$emit("setTitleHeader", this.titleHeader)
+    this.$emit("setVisibilityButtonReturnMain", false)
+  },
 }
 </script>
 
@@ -108,7 +120,6 @@ export default {
   .container {
     min-width: 450px;
     padding: 40px;
-    background-color: #171620;
     border: 2px solid #2f2f40;
     border-radius: 20px;
     display: flex;

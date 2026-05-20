@@ -1,5 +1,10 @@
 <template>
-  <div>
+  <div
+    :style="{
+      backgroundColor: themeStore.getBackgroundMain,
+      color: themeStore.getColorText
+    }"
+  >
     <div v-if="authentication">
       <main-header
         :title="titleHeader"
@@ -20,12 +25,18 @@
 import mainHeader from "@/components/MainHeader.vue";
 import mainBody from "@/components/MainBody.vue";
 import Authentication from "@/page/Authentication.vue";
+import { useThemeStore } from "@/stores/theme";
+
 export default {
   name:"app",
   components:{
     Authentication,
     mainHeader,
     mainBody
+  },
+  setup() {
+    const themeStore = useThemeStore();
+    return { themeStore };
   },
   data(){
     return{
@@ -45,9 +56,7 @@ export default {
 </script>
 
 <style>
-a{
-  color: aliceblue;
-}
+
 .gradientLine {
   height: 1px;
   background: linear-gradient(90deg, rgba(96, 96, 96, 0.3), rgba(96, 96, 96, 0.6), rgba(96, 96, 96, 0.3));
@@ -75,18 +84,10 @@ h4{
   margin: 0;
   padding: 0;
   font-size: 14pt;
-}
-.finePrint{
-  font-size: 12pt;
-  font-weight: lighter;
-  color: lightsteelblue;
+  font-family: Calibri;
 }
 a{
   text-decoration: none;
-}
-body{
-  background-color: #0b0b10;
-  color: aliceblue;
 }
 input::placeholder {
   color: #757575;

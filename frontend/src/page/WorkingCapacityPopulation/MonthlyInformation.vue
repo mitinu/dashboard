@@ -1,24 +1,24 @@
 <template>
   <div class="workingCapacityPopulation">
-    <div class="content unemployment">
+    <div class="content unemployment" :style="{backgroundColor: themeStore.getColor3}">
       <histogramAndChartPage
-          title="уровень безработицы"
+          title="Уровень безработицы"
           :dataset="datasetUnemployment"
           :dates="datesUnemployment"
           :legend="legendUnemployment"
       />
     </div>
-    <div class="content averageSalary">
+    <div class="content averageSalary" :style="{backgroundColor: themeStore.getColor3}">
       <chartPage
-          title="среднемесячная начисляемая заработная плата"
+          title="Среднемесячная начисляемая заработная плата"
           :dataset="datasetAverageSalary"
           :dates="datesAverageSalary"
           :legend="legendAverageSalary"
       />
     </div>
-    <div class="content CPI">
+    <div class="content CPI" :style="{backgroundColor: themeStore.getColor3}">
       <fourChartPage
-          title="индекс потребительских цен к соответствующим кварталам прошлых лет, %"
+          title="Индекс потребительских цен к соответствующим кварталам прошлых лет, %"
           :dataset="datasetCPI"
           :dates="datesCPI"
           :legend="legendCPI"
@@ -31,18 +31,23 @@
 import histogramAndChartPage from "@/components/diagram/page/HistogramAndChartPage.vue";
 import chartPage from "@/components/diagram/page/chartPage.vue";
 import fourChartPage from "@/components/diagram/page/FourChartPage.vue";
+import { useThemeStore } from "@/stores/theme";
 
 export default {
+  name: "monthlyInformation",
   components:{
     histogramAndChartPage,
     chartPage,
     fourChartPage
   },
-  name: "monthlyInformation",
+  setup() {
+    const themeStore = useThemeStore();
+    return { themeStore };
+  },
   data(){
     return{
       title: "Ежемесячная информация",
-      titleHeader: "реализация национальных проектов",
+      titleHeader: "Реализация национальных проектов",
 
       datasetUnemploymentTest: {
         histogramColor:{
@@ -267,7 +272,6 @@ export default {
   }
   .content{
     border: 1px solid #4b4b4b;
-    background-color: #171620;
     border-radius: 20px;
     min-width: 0;
   }

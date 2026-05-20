@@ -1,6 +1,6 @@
 <template>
   <div class="authentication">
-    <div class="container">
+    <div class="container" :style="{backgroundColor: themeStore.getColor3}">
       <h1>Вход</h1>
       <div class="inputs">
         <input-text-base
@@ -23,11 +23,17 @@
 <script>
 import inputTextBase from "@/components/UI/InputTextBase.vue"
 import buttonBase from "@/components/UI/ButtonBase.vue";
+import { useThemeStore } from "@/stores/theme";
+
 export default {
   name: "authentication",
   components:{
     inputTextBase,
     buttonBase
+  },
+  setup() {
+    const themeStore = useThemeStore();
+    return { themeStore };
   },
   data() {
     return {
@@ -88,7 +94,6 @@ export default {
     min-height: 350px;
     width: 70%;
     height: 60%;
-    background-color: #171620;
 
 
     border: 2px solid #2f2f40;

@@ -3,27 +3,35 @@
       type="button"
       class="buttonBase"
       :value=value
+      :style="{
+        backgroundColor: themeStore.getColor4,
+        color: themeStore.getColorText
+      }"
   >
 </template>
 
 <script>
+import { useThemeStore } from "@/stores/theme";
+
 export default{
   name:"buttonBase",
   props:{
     value:{
       type:String,
     },
-  }
+  },
+  setup() {
+    const themeStore = useThemeStore();
+    return { themeStore };
+  },
 }
 </script>
 
 <style>
 .buttonBase{
-  background-color: #2f2f40;
   height: 40px;
   padding: 0 40px;
   border-radius: 20px ;
-  color: #FFFFFF;
   cursor: pointer;
 }
 </style>
