@@ -11,12 +11,14 @@
         :color="color"
         :widthColum="widthColum"
         :lowerBackgroundFill="config.lowerBackgroundFill"
+        :frameColor="themeStore.getColorText"
     />
   </div>
 </template>
 
 <script>
 import ChartItem from "@/components/diagram/ChartItem.vue";
+import {useThemeStore} from "@/stores/theme.js";
 
 export default {
   name: "chart",
@@ -35,6 +37,10 @@ export default {
   data() {
     return{
     }
+  },
+  setup() {
+    const themeStore = useThemeStore();
+    return { themeStore };
   },
 }
 </script>
