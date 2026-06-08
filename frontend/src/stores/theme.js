@@ -29,5 +29,5 @@ export const useThemeStore = defineStore('theme', () => {
         color4.value = newColor
     }
 
-    return { backgroundMain, getBackgroundMain, setBackgroundMain, colorText, getColorText, setColorText, color3, getColor3, setColor3, color4, getColor4, setColor4, }
+    return { getBackgroundMain, setBackgroundMain, getColorText, setColorText, getColor3, setColor3, getColor4, setColor4}
 })
