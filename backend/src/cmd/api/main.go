@@ -36,10 +36,7 @@ func main() {
 	application.PlannerStart(c, cfg)
 	defer c.Stop()
 
-	r := router.SetupRouter(router.Repositories{
-		LaborMarket:   postgres.NewLaborMarketRepository(db),
-		AverageSalary: postgres.NewAverageSalaryRepository(db),
-	})
+	r := router.SetupRouter(cfg)
 
 	srv := &http.Server{
 		Addr:           ":" + cfg.AppPort,

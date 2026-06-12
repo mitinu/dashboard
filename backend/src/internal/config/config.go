@@ -42,8 +42,11 @@ type Config struct {
 	DBName     string
 	DBSslMode  string
 	// Hash
-	Argon2Config Argon2Config
-	Pepper       string
+	Argon2Config     Argon2Config
+	Pepper           string
+	SizeRefreshToken int
+	DurationJWT      time.Duration
+	SecretKeyJWT     []byte
 	// Superadmin
 	Login           string
 	Password        string
@@ -71,11 +74,14 @@ func Load() (*Config, error) {
 		DBName:     getEnv("DB_NAME", "postgres"),
 		DBSslMode:  getEnv("DB_SSL_MODE", "disable"),
 		// Hash
-		Pepper: getEnv("PEPPER", "pizze"),
+		Pepper:           getEnv("PEPPER", "pizze"),
+		SizeRefreshToken: getIntEnv("SIZE_REFRESH_TOKEN", 32),
+		DurationJWT:      getDurationEnv("DURATION_JWT", 24*time.Hour),
+		SecretKeyJWT:     []byte(getEnv("SECRET_KEY_JWT", "pizze")),
 		// Superadmin
 		Login:           getEnv("LOGIN", "root"),
 		Password:        getEnv("PASSWORD", "root"),
-		TitleSadminInDB: getEnv("TITLESADMININDB", "суперадмин"),
+		TitleSadminInDB: getEnv("TITLE_SADMIN_IN_DB", "суперадмин"),
 	}
 	// Настройка таймаутов сервера
 	cfg.Server = ServerConfig{
@@ -88,8 +94,8 @@ func Load() (*Config, error) {
 		Memory:      uint32(getIntEnv("MEMORY", 64) * 1024),
 		Iterations:  uint32(getIntEnv("ITERATIONS", 3)),
 		Parallelism: uint8(getIntEnv("PARALLELISM", 4)),
-		SaltLength:  uint32(getIntEnv("SALTLENGTH", 16)),
-		KeyLength:   uint32(getIntEnv("KEYLENGTH", 32)),
+		SaltLength:  uint32(getIntEnv("SALT_LENGTH", 16)),
+		KeyLength:   uint32(getIntEnv("KEY_LENGTH", 32)),
 	}
 
 	// Устанавливаем режим Gin после загрузки конфигурации

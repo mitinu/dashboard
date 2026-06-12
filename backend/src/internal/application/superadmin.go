@@ -10,7 +10,7 @@ import (
 func CreateSuperadmin(cfg *config.Config, db *postgres.PostgresDB) {
 	accessStatusUser := postgres.NewAccessStatusUserRepository(db)
 	userRepository := postgres.NewUserRepository(db, cfg)
-	reqAndAutoService := NewReqAndAutoService(userRepository)
+	reqAndAutoService := NewReqAndAutoService(userRepository, cfg)
 	userRepository.DeleteSuperadmin()
 	accessStatusId, err := accessStatusUser.GetIdByTitle(cfg.TitleSadminInDB)
 	if err != nil {
@@ -22,7 +22,7 @@ func CreateSuperadmin(cfg *config.Config, db *postgres.PostgresDB) {
 		AccessStatusId: accessStatusId,
 	}
 
-	err = reqAndAutoService.Register(userReq, cfg)
+	err = reqAndAutoService.Register(userReq)
 	if err != nil {
 		logger.Error.Println(err)
 	}

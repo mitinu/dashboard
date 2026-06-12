@@ -8,7 +8,11 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-func GetUnemployedByDate(repo domain.LaborMarket) gin.HandlerFunc {
+type LaborMarketHandler struct {
+	domain domain.LaborMarket
+}
+
+func (h LaborMarketHandler) GetUnemployedByDate() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		startDate := c.Query("start")
 		endDate := c.Query("end")
@@ -18,7 +22,7 @@ func GetUnemployedByDate(repo domain.LaborMarket) gin.HandlerFunc {
 			return
 		}
 
-		data, err := repo.GetLaborMarketByDateRange(startDate, endDate)
+		data, err := h.domain.GetByDateRange(startDate, endDate)
 		if err != nil {
 			c.JSON(http.StatusInternalServerError, gin.H{"error": "Ошибка БД"})
 			return
@@ -41,7 +45,7 @@ func GetUnemployedByDate(repo domain.LaborMarket) gin.HandlerFunc {
 	}
 }
 
-func GetUnemployedPercentageByDate(repo domain.LaborMarket) gin.HandlerFunc {
+func (h LaborMarketHandler) GetUnemployedPercentageByDate() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		startDate := c.Query("start")
 		endDate := c.Query("end")
@@ -51,7 +55,7 @@ func GetUnemployedPercentageByDate(repo domain.LaborMarket) gin.HandlerFunc {
 			return
 		}
 
-		data, err := repo.GetLaborMarketByDateRange(startDate, endDate)
+		data, err := h.domain.GetByDateRange(startDate, endDate)
 		if err != nil {
 			c.JSON(http.StatusInternalServerError, gin.H{"error": "Ошибка БД"})
 			return

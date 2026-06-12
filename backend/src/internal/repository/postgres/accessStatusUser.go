@@ -16,7 +16,7 @@ func NewAccessStatusUserRepository(Postgres *PostgresDB) domain.AccessStatusUser
 
 func (r *AccessStatusUserRepository) GetIdByTitle(title string) (int64, error) {
 	var id int64
-	err := r.DB.QueryRow(SQL.GetIdByTitle, title).Scan(&id)
+	err := r.DB.QueryRow(SQL.GetIdAccessStatusUserByTitle, title).Scan(&id)
 	if err != nil {
 		return -1, err
 	}

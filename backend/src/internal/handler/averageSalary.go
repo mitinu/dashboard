@@ -7,7 +7,11 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-func GetAverageSalaryHandler(repo domain.AverageSalary) gin.HandlerFunc {
+type AverageSalaryHandler struct {
+	domain domain.AverageSalary
+}
+
+func (h AverageSalaryHandler) Get() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		start := c.Query("start")
 		end := c.Query("end")
@@ -17,7 +21,7 @@ func GetAverageSalaryHandler(repo domain.AverageSalary) gin.HandlerFunc {
 			return
 		}
 
-		data, err := repo.GetByDateRange(start, end)
+		data, err := h.domain.GetByDateRange(start, end)
 		if err != nil {
 			c.JSON(http.StatusInternalServerError, gin.H{"error": "Ошибка БД"})
 			return

@@ -59,7 +59,7 @@ func (r *LaborMarketRepository) DeleteByIdTable(idTable int64) (int64, error) {
 	return rowsAffected, nil
 }
 
-func (r *LaborMarketRepository) GetLaborMarketByDateRange(startDate, endDate string) ([]DTO.LaborMarket, error) {
+func (r *LaborMarketRepository) GetByDateRange(startDate, endDate string) ([]DTO.LaborMarket, error) {
 	rows, err := r.DB.Query(SQL.GetLaborMarketByDateRange, startDate, endDate)
 	if err != nil {
 		return nil, fmt.Errorf("ошибка при поиске в диапазоне дат: %w", err)

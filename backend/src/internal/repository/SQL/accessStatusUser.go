@@ -1,7 +1,7 @@
 package SQL
 
 const (
-	GetIdByTitle = `
+	GetIdAccessStatusUserByTitle = `
 		SELECT id
 		FROM public.access_status_user
 		WHERE title = $1
