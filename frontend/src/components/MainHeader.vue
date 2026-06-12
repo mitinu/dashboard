@@ -1,15 +1,10 @@
 <template>
   <header :style="{backgroundColor: themeStore.getColor4}">
     <div class="header">
-      <burger-menu
-          :class="{ 'is-open': visibilityBurgerMenu }"
-          @switchVisibilityBurgerMenu="switchVisibilityBurgerMenu"
-      />
       <div class="container">
         <div>
           <menu-burger-horizontal-icon
               @click.stop="switchVisibilityBurgerMenu"
-              class="positionAbsolute"
               :color="themeStore.getColorText"
           />
         </div>
@@ -32,7 +27,6 @@
 import arrowDown from "@/components/icons/ArrowDown.vue";
 import menuBurgerHorizontalIcon from "@/components/icons/MenuBurgerHorizontalIcon.vue";
 import buttonExit from "@/components/UI/ButtonExit.vue";
-import burgerMenu from "@/components/BurgerMenu.vue";
 import { useThemeStore } from "@/stores/theme";
 
 export default {
@@ -40,8 +34,7 @@ export default {
   components: {
     menuBurgerHorizontalIcon,
     arrowDown,
-    buttonExit,
-    burgerMenu
+    buttonExit
   },
   props:{
     title:{type: String, default: "title"}
@@ -50,14 +43,10 @@ export default {
     const themeStore = useThemeStore();
     return { themeStore };
   },
-  data(){
-    return{
-      visibilityBurgerMenu: false
-    }
-  },
   methods:{
     switchVisibilityBurgerMenu(){
-      this.visibilityBurgerMenu = !this.visibilityBurgerMenu
+      console.log("fdsfssfd")
+      this.$emit("switchVisibilityBurgerMenu")
     }
   }
 }
@@ -77,6 +66,7 @@ export default {
       }
     }
     .container{
+      padding-left: 50px;
       display: grid;
       grid-auto-flow: column;
       gap: 30px;
@@ -94,12 +84,5 @@ export default {
         height: 35px;
       }
     }
-  }
-  :deep(.BurgerMenu) {
-    transform: translateX(-100%);
-    transition: transform 0.3s ease-in-out;
-  }
-  :deep(.BurgerMenu.is-open) {
-    transform: translateX(0);
   }
 </style>

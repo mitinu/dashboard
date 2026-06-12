@@ -46,8 +46,8 @@ export default {
   },
   data(){
     return{
-      title: "Ежемесячная информация",
-      titleHeader: "Реализация национальных проектов",
+      title: "Экономические данные",
+      titleHeader: "Сводные данные",
 
       datasetUnemploymentTest: {
         histogramColor:{

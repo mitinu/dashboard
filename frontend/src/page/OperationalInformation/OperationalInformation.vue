@@ -24,7 +24,7 @@ export default {
   data(){
     return{
       title: "Оперативные сведения",
-      titleHeader: "Реализация национальных проектов",
+      titleHeader: "Сводные данные",
 
       dataAppealTest: {
         dateRange: {

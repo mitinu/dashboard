@@ -1,5 +1,6 @@
 <template>
   <div
+    class="app"
     :style="{
       backgroundColor: themeStore.getBackgroundMain,
       color: themeStore.getColorText
@@ -7,15 +8,23 @@
   >
     <div v-if="authentication">
       <main-header
-        :title="titleHeader"
+          :title="titleHeader"
+          @switchVisibilityBurgerMenu="switchVisibilityBurgerMenu"
       />
-      <main-body
-        @setTitleHeader="setTitleHeader"
-      />
+      <div class="app__content">
+        <burger-menu
+            :class="{ 'is-open': visibilityBurgerMenu }"
+            :is-open="visibilityBurgerMenu"
+            @switchVisibilityBurgerMenu="switchVisibilityBurgerMenu"
+        />
+        <main-body
+            @setTitleHeader="setTitleHeader"
+        />
+      </div>
     </div>
     <div v-else>
       <authentication
-        @confirmationAuthentication="confirmationAuthentication"
+          @confirmationAuthentication="confirmationAuthentication"
       />
     </div>
   </div>
@@ -26,10 +35,12 @@ import mainHeader from "@/components/MainHeader.vue";
 import mainBody from "@/components/MainBody.vue";
 import Authentication from "@/page/Authentication.vue";
 import { useThemeStore } from "@/stores/theme";
+import BurgerMenu from "@/components/BurgerMenu.vue";
 
 export default {
   name:"app",
   components:{
+    burgerMenu: BurgerMenu,
     Authentication,
     mainHeader,
     mainBody
@@ -41,7 +52,8 @@ export default {
   data(){
     return{
       titleHeader:"",
-      authentication: false
+      authentication: false,
+      visibilityBurgerMenu: false
     }
   },
   methods:{
@@ -50,6 +62,10 @@ export default {
     },
     confirmationAuthentication(){
       this.authentication = true
+    },
+    switchVisibilityBurgerMenu(){
+      console.log("fdsfssfd")
+      this.visibilityBurgerMenu = !this.visibilityBurgerMenu
     }
   }
 }
@@ -83,7 +99,7 @@ h4{
   border: none;
   margin: 0;
   padding: 0;
-  font-size: 14pt;
+  font-size: 13pt;
   font-family: Calibri;
 }
 a{
@@ -92,5 +108,10 @@ a{
 input::placeholder {
   color: #757575;
   opacity: 1;
+}
+.app__content{
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  height: 100%;
 }
 </style>

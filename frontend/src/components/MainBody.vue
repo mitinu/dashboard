@@ -53,6 +53,7 @@ export default {
 <style scoped>
 .mainBody{
   height: calc(100vh - 90px);
+  width: 100%;
   .content{
     height: 75px;
     display: flex;
