@@ -21,14 +21,14 @@
         />
       </div>
 
-      <modal-window
-          v-if="visibilityModalWindow"
-          @closeModalWindow="closeModalWindow"
-          :header="headerModalWindow"
-      >
-        <setting @setHeader="setHeaderModalWindow" />
-      </modal-window>
     </div>
+    <modal-window
+        v-if="visibilityModalWindow"
+        @closeModalWindow="closeModalWindow"
+        :header="headerModalWindow"
+    >
+      <setting @setHeader="setHeaderModalWindow" />
+    </modal-window>
   </div>
 </template>
 
