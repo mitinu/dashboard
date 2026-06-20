@@ -89,6 +89,9 @@ h3{
 h4{
   font-size: 16pt;
 }
+span{
+  white-space: pre-line;
+}
 .mt20{
   margin-top: 20px;
 }

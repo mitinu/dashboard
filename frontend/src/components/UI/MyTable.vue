@@ -23,9 +23,10 @@
             :key="column.key"
             :class="['table-row', { 'table-row-last': index === Object.keys(bodyTable).length - 1}]"
         >
-        <span>
-          {{rowTable[column.key]}}
-        </span>
+        <slot :name="column.key" :row="rowTable" :rowKey="key" class="slot">
+          <span>{{rowTable[column.key]}}</span>
+        </slot>
+
         </div>
       </template>
     </div>
@@ -50,6 +51,8 @@ export default {
 <style scoped lang="scss">
 .myTable{
   position: relative;
+  width: 100%;
+  height: 100%;
   .table{
     width: 100%;
     position: absolute;
@@ -75,6 +78,8 @@ export default {
       border-bottom: 1px solid #e0e0e0;
       padding-top: 12px;
       padding-bottom: 12px;
+      padding-right: 5%;
+
       &-last {
         border-bottom: none;
       }

@@ -3,6 +3,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 import monthlyInformation from "@/page/WorkingCapacityPopulation/MonthlyInformation.vue";
 import operationalInformation from "@/page/OperationalInformation/OperationalInformation.vue";
 import registration from "@/page/Registration.vue";
+import users from "@/page/Users/Users.vue"
 
 const routes = [
     {
@@ -24,7 +25,12 @@ const routes = [
         path: '/registration',
         name: 'registration',
         component: registration,
-    }
+    },
+    {
+        path: '/users',
+        name: 'users',
+        component: users,
+    },
 ]
 
 const router = createRouter({history: createWebHistory(), routes})

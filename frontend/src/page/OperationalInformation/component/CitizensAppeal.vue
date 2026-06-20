@@ -116,9 +116,6 @@ export default {
         border: none;
         flex: 1;
       }
-      .myTable{
-        height: 100%;
-      }
     }
   }
 }

@@ -2,14 +2,17 @@
   <div class="BurgerMenu" :class="{ 'is-open': isOpen }" :style="menuStyles">
     <div class="content">
       <div class="body">
+        <router-link class="menu-link" to="/registration">
+          <span class="link-text">Регистрация</span>
+        </router-link>
+        <router-link class="menu-link" to="/users">
+          <span class="link-text">Пользователи</span>
+        </router-link>
         <router-link class="menu-link" to="/operationalInformation">
           <span class="link-text">Оперативные сведения</span>
         </router-link>
         <router-link class="menu-link" to="/monthlyInformation">
           <span class="link-text">Экономические данные</span>
-        </router-link>
-        <router-link class="menu-link" to="/registration">
-          <span class="link-text">Регистрация</span>
         </router-link>
       </div>
 
@@ -136,8 +139,14 @@ export default {
 }
 
 .footer {
+  height: 60px;
   display: flex;
-  justify-content: flex-start;
+  justify-content: center;
+  align-items: center;
+  svg{
+    height: 40px;
+    width: 40px;
+  }
 }
 
 .iconGears {
