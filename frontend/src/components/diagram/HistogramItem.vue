@@ -19,7 +19,8 @@ export default {
     maxValue:{type: Number},
     minValue:{type: Number},
     ratioFillingWidth:{type: Array, default:[1, 2]},
-    color:{type: String}
+    color:{type: String},
+    zeroPosition:{type: Number},
   },
   name: "HistogramItem",
   data() {
@@ -49,8 +50,13 @@ export default {
 
     // Рисуем с координатами от левого нижнего угла
     ctx.fillStyle = this.color
+    if (this.value>=0){
+      ctx.fillRect(this.ratioFillingWidth[0]*10, this.zeroPosition, this.ratioFillingWidth[1]*20, this.value) // Квадрат на 50 пикселей выше нижнего края
+    }
+    else {
+      ctx.fillRect(this.ratioFillingWidth[0]*10, this.zeroPosition, this.ratioFillingWidth[1]*20, this.value) // Квадрат на 50 пикселей выше нижнего края
 
-    ctx.fillRect(this.ratioFillingWidth[0]*10, 0, this.ratioFillingWidth[1]*20, this.value-this.minValue) // Квадрат на 50 пикселей выше нижнего края
+    }
   },
 }
 </script>

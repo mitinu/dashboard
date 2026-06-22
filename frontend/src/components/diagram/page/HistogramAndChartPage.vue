@@ -24,6 +24,7 @@
         :color="dataset.histogramColor.color"
         :widthColum="widthColum"
         :config="dataset.histogramConfig"
+        :zeroPosition="rangeBoundariesHistogram.zeroPosition"
       />
       <chart
         v-if="dataset.chart"
@@ -116,12 +117,16 @@ export default {
       }
       maxBorder = displayedRange+minBorder
 
+      const zeroPosition = (numberSteps-maxBorder/sizeStep)*sizeStep
+
+
       return {
         maxBorder: maxBorder,
         minBorder: minBorder,
         displayedRange: displayedRange,
         numberSteps: numberSteps,
-        sizeStep: sizeStep
+        sizeStep: sizeStep,
+        zeroPosition: zeroPosition
       }
 
 

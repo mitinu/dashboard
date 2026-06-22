@@ -8,6 +8,7 @@
       :minValue = "minValue"
       :color="color"
       :widthColum="widthColum"
+      :zeroPosition="zeroPosition"
     />
   </div>
 </template>
@@ -25,7 +26,8 @@ export default {
     maxValue:{type: Number},
     minValue:{type: Number},
     ratioFillingWidth:{type: Array},
-    color:{type: String}
+    color:{type: String},
+    zeroPosition:{type: Number},
   },
   data() {
     return{

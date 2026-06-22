@@ -79,7 +79,6 @@ export default {
       }
       else {
         maxBorder = this.roundingUp(maxBorder, 1, 1, this.dataset.histogram, 1.1);
-        console.log(maxBorder)
         minBorder = this.roundingUp(minBorder, -1, 1, this.dataset.histogram);
       }
       let displayedRange = this.searchRange(maxBorder, minBorder)
@@ -121,7 +120,6 @@ export default {
         minBorder = Math.floor(minBorder/sizeStep)*sizeStep
       }
       maxBorder = displayedRange+minBorder
-      console.log(maxBorder)
 
       return {
         maxBorder: maxBorder,
