@@ -14,6 +14,9 @@
         <router-link class="menu-link" to="/monthlyInformation">
           <span class="link-text">Экономические данные</span>
         </router-link>
+        <router-link class="menu-link" to="/population">
+          <span class="link-text">Движение населения</span>
+        </router-link>
       </div>
 
       <div class="footer">

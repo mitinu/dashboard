@@ -139,8 +139,8 @@ export default {
     }
   },
   mounted() {
-    this.$emit("setTitleMain", this.title)
-    this.$emit("setTitleHeader", this.titleHeader)
+    this.$emit("setTitleMain", "")
+    this.$emit("setTitleHeader", this.title)
     this.$emit("setVisibilityButtonReturnMain", false)
   },
 }

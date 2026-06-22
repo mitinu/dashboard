@@ -64,11 +64,11 @@ export default {
       this.authentication = true
     },
     switchVisibilityBurgerMenu(){
-      console.log("fdsfssfd")
       this.visibilityBurgerMenu = !this.visibilityBurgerMenu
     }
   }
 }
+//TODO переделать графики переделать стилизацию
 </script>
 
 <style>

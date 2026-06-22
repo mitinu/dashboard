@@ -45,7 +45,6 @@ export default {
   },
   methods:{
     switchVisibilityBurgerMenu(){
-      console.log("fdsfssfd")
       this.$emit("switchVisibilityBurgerMenu")
     }
   }

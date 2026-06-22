@@ -5,35 +5,24 @@
         :title="title"
     />
     <axesFrame
-      :leftYAxis="leftYAxis"
-      :XAxis="XAxis"
-      :rightYAxis="rightYAxis"
-      :widthColum="widthColum"
+        :leftYAxis="leftYAxis"
+        :XAxis="XAxis"
+        :widthColum="widthColum"
     >
       <diagramGrid
-        :numberSteps="rangeBoundariesHistogram.numberSteps"
-        :dates="dates"
-        :widthColum="widthColum"
+          :numberSteps="rangeBoundariesHistogram.numberSteps"
+          :dates="dates"
+          :widthColum="widthColum"
       />
-      <histogram
-        v-if="dataset.histogram"
-        :minValue="rangeBoundariesHistogram.minBorder"
-        :maxValue="rangeBoundariesHistogram.maxBorder"
-        :dataset="dataset.histogram"
-        :dates="dates"
-        :color="dataset.histogramColor.color"
-        :widthColum="widthColum"
-        :config="dataset.histogramConfig"
-      />
-      <chart
-        v-if="dataset.chart"
-        :minValue="rangeBoundariesChart.minBorder"
-        :maxValue="rangeBoundariesChart.maxBorder"
-        :dataset="dataset.chart"
-        :dates="dates"
-        :color="dataset.chartColor.color"
-        :widthColum="widthColum"
-        :config="dataset.chartConfig"
+      <comparison-histogram
+          v-if="dataset.histogram"
+          :minValue="rangeBoundariesHistogram.minBorder"
+          :maxValue="rangeBoundariesHistogram.maxBorder"
+          :dataset="dataset.histogram"
+          :dates="dates"
+          :colors="dataset.histogramColor"
+          :widthColum="widthColum"
+          :config="dataset.histogramConfig"
       />
     </axesFrame>
   </div>
@@ -42,15 +31,13 @@
 <script>
 import HeaderDiagramPage from "@/components/diagram/page/component/headerDiagramPage.vue";
 import diagramGrid from "@/components/diagram/DiagramGrid.vue";
-import chart from "@/components/diagram/Chart.vue";
-import histogram from "@/components/diagram/Histogram.vue";
+import comparisonHistogram from "@/components/diagram/ComparisonHistogram.vue";
 import AxesFrame from "@/components/diagram/page/component/AxesFrame.vue";
 
 export default {
   components:{
     AxesFrame,
-    histogram,
-    chart,
+    comparisonHistogram,
     diagramGrid,
     HeaderDiagramPage
   },
@@ -60,7 +47,7 @@ export default {
     dates:{type: Array},
     legend:{type: Array}
   },
-  name: "HistogramAndChartPage",
+  name: "comparisonHistogramPage",
   data(){
     return{
       widthColum: 80,
@@ -80,63 +67,23 @@ export default {
         items: arr
       }
     },
-    rightYAxis() {
-      const arr = []
-      for (let idx = 0; idx < this.rangeBoundariesChart.numberSteps + 1; idx++) {
-        arr.push(this.formatValue(this.rangeBoundariesChart.maxBorder - (idx) * this.rangeBoundariesChart.sizeStep))
-      }
-      return {
-        title: this.dataset.chartYAxisTitle,
-        items: arr
-      }
-    },
     rangeBoundariesHistogram(){
-      let maxBorder = ((obj = this.dataset.histogram) => {for (const key in obj) return obj[key];})();
-      let minBorder = ((obj = this.dataset.histogram) => {for (const key in obj) return obj[key];})();
+      //TODO это надо исправлять
+      let maxBorder = ((obj = this.dataset.histogram) => {for (const key in obj) return obj[key][0];})();
+      let minBorder = ((obj = this.dataset.histogram) => {for (const key in obj) return obj[key][0];})();
 
       if (minBorder<1)
       {
-        maxBorder = this.roundingUp(maxBorder, 1, 2, this.dataset.histogram);
+        maxBorder = this.roundingUp(maxBorder, 1, 2, this.dataset.histogram, 1.1);
         minBorder = this.roundingUp(minBorder, -1, 1, this.dataset.histogram);
       }
       else {
-        maxBorder = this.roundingUp(maxBorder, 1, 1, this.dataset.histogram, 1.4);
-        minBorder = this.roundingUp(minBorder, -1, 1, this.dataset.histogram, 1.0);
+        maxBorder = this.roundingUp(maxBorder, 1, 1, this.dataset.histogram, 1.1);
+        console.log(maxBorder)
+        minBorder = this.roundingUp(minBorder, -1, 1, this.dataset.histogram);
       }
       let displayedRange = this.searchRange(maxBorder, minBorder)
 
-      let numberSteps = this.rangeBoundariesChart.numberSteps
-      let x = parseInt(displayedRange.toString().slice(0,2))
-      if (x%numberSteps!=0){
-        displayedRange=parseInt(x+(numberSteps-x%numberSteps)+displayedRange.toString().slice(2))
-      }
-      let sizeStep = displayedRange/numberSteps
-      if(minBorder%sizeStep!=0){
-        minBorder = Math.floor(minBorder/sizeStep)*sizeStep
-      }
-      maxBorder = displayedRange+minBorder
-
-      return {
-        maxBorder: maxBorder,
-        minBorder: minBorder,
-        displayedRange: displayedRange,
-        numberSteps: numberSteps,
-        sizeStep: sizeStep
-      }
-
-
-    },
-    rangeBoundariesChart(){
-
-      let maxBorder = ((obj = this.dataset.chart) => {for (const key in obj) return obj[key];})();
-      let minBorder = ((obj = this.dataset.chart) => {for (const key in obj) return obj[key];})();
-
-
-
-      maxBorder = this.roundingUp(maxBorder, 1, 1, this.dataset.chart);
-      minBorder = this.roundingUp(minBorder, -1, 1, this.dataset.chart, 1.2);
-
-      let displayedRange = this.searchRange(maxBorder, minBorder)
       let numberSteps
 
       let lastDigit = this.lastDigit(displayedRange)
@@ -165,16 +112,16 @@ export default {
           numberSteps = displayedRange
           break
       }
-
-      let sizeStep =  Number((displayedRange/numberSteps).toFixed(10))
-
-
+      let x = parseInt(displayedRange.toString().slice(0,2))
+      if (x%numberSteps!=0){
+        displayedRange=parseInt(x+(numberSteps-x%numberSteps)+displayedRange.toString().slice(2))
+      }
+      let sizeStep = displayedRange/numberSteps
       if(minBorder%sizeStep!=0){
         minBorder = Math.floor(minBorder/sizeStep)*sizeStep
       }
-
-
-      maxBorder = Number((displayedRange+minBorder).toFixed(10));
+      maxBorder = displayedRange+minBorder
+      console.log(maxBorder)
 
       return {
         maxBorder: maxBorder,
@@ -184,7 +131,8 @@ export default {
         sizeStep: sizeStep
       }
 
-    }
+
+    },
   },
   methods:{
     validationDisplayedRange(value) {
@@ -194,32 +142,16 @@ export default {
       if (simpleNumber.includes(value.toString().slice(0, 2))) return false
       return true
     },
-    lastDigit(n) {
-      if(n<1){
-        n *= 10
-      }
-      let num = n;
-      let d = 2;
 
-      while (num >= 10) {
-        if (num % d === 0) {
-          num = num / d;
-        } else {
-          d++;
-        }
-      }
-
-      return num;
-    },
-    /**
-     * bigWay = 1; -1
-     * */
-    roundingUp(startValue, bigWay, charactersBeforeRounding, arr, roundingFactor = 1.0){
+    roundingUp(startValue, bigWay, charactersBeforeRounding, arrs, roundingFactor = 1.0){
       let thisValue = startValue
-      for (const idx in arr){
-        const value = arr[idx]
-        if (thisValue*bigWay<value*bigWay){
-          thisValue=value
+      for (const i in arrs) {
+        const arr = arrs[i]
+        for (const idx in arr){
+          const value = arr[idx]
+          if (thisValue*bigWay<value*bigWay){
+            thisValue=value
+          }
         }
       }
       if(bigWay==1&&thisValue>0||bigWay==-1&&thisValue<0){
@@ -238,6 +170,7 @@ export default {
         if(bigWay==-1){
           thisValue =  Math.floor(thisValue / factor) * factor;
         }
+
         return parseInt(thisValue)
       }
       else{
@@ -251,6 +184,23 @@ export default {
         return parseFloat(thisValue)
       }
       return -1
+    },
+    lastDigit(n) {
+      if(n<1){
+        n *= 10
+      }
+      let num = n;
+      let d = 2;
+
+      while (num >= 10) {
+        if (num % d === 0) {
+          num = num / d;
+        } else {
+          d++;
+        }
+      }
+
+      return num;
     },
 
 

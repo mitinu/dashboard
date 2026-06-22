@@ -251,8 +251,8 @@ export default {
     this.legendCPI = [this.datasetCPI.chart1Color, this.datasetCPI.chart2Color, this.datasetCPI.chart3Color, this.datasetCPI.chart4Color]
   },
   mounted() {
-    this.$emit("setTitleMain", this.title)
-    this.$emit("setTitleHeader", this.titleHeader)
+    this.$emit("setTitleMain", "")
+    this.$emit("setTitleHeader", this.title)
     this.$emit("setVisibilityButtonReturnMain", false)
   },
 
