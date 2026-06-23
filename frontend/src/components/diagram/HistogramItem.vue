@@ -19,7 +19,7 @@ export default {
     maxValue:{type: Number},
     minValue:{type: Number},
     ratioFillingWidth:{type: Array, default:[1, 2]},
-    color:{type: String},
+    colors:{type: Array},
     zeroPosition:{type: Number},
   },
   name: "HistogramItem",
@@ -47,15 +47,15 @@ export default {
     ctx.translate(0, this.$refs.canvas.height)
     ctx.scale(scaleX, -scaleY);
 
-
+    ctx.fillStyle = this.colors[0].color
     // Рисуем с координатами от левого нижнего угла
-    ctx.fillStyle = this.color
     if (this.value>=0){
+      ctx.fillStyle = this.colors[0].color
       ctx.fillRect(this.ratioFillingWidth[0]*10, this.zeroPosition, this.ratioFillingWidth[1]*20, this.value) // Квадрат на 50 пикселей выше нижнего края
     }
     else {
+      ctx.fillStyle = this.colors[1].color
       ctx.fillRect(this.ratioFillingWidth[0]*10, this.zeroPosition, this.ratioFillingWidth[1]*20, this.value) // Квадрат на 50 пикселей выше нижнего края
-
     }
   },
 }

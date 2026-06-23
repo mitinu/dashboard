@@ -21,7 +21,7 @@
         :maxValue="rangeBoundariesHistogram.maxBorder"
         :dataset="dataset.histogram"
         :dates="dates"
-        :color="dataset.histogramColor.color"
+        :colors="dataset.histogramColor"
         :widthColum="widthColum"
         :config="dataset.histogramConfig"
         :zeroPosition="rangeBoundariesHistogram.zeroPosition"

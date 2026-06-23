@@ -6,7 +6,7 @@
       :value="dataset[date]"
       :maxValue = "maxValue"
       :minValue = "minValue"
-      :color="color"
+      :colors="colors"
       :widthColum="widthColum"
       :zeroPosition="zeroPosition"
     />
@@ -26,7 +26,7 @@ export default {
     maxValue:{type: Number},
     minValue:{type: Number},
     ratioFillingWidth:{type: Array},
-    color:{type: String},
+    colors:{type: Array},
     zeroPosition:{type: Number},
   },
   data() {

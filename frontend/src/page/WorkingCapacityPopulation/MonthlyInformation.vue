@@ -50,10 +50,12 @@ export default {
       titleHeader: "Сводные данные",
 
       datasetUnemploymentTest: {
-        histogramColor:{
-          title: "численность безработных, чел.",
-          color: "#412467"
-        },
+        histogramColor:[
+          {
+            title: "численность безработных, чел.",
+            color: "#412467"
+          }
+        ],
         histogram: {
           "22.09.25": 1726,
           "22.12.25": 1541,
@@ -241,7 +243,7 @@ export default {
   created() {
     this.datasetUnemployment = this.datasetUnemploymentTest
     this.datesUnemployment = this.datesUnemploymentTest
-    this.legendUnemployment = [this.datasetUnemployment.histogramColor, this.datasetUnemployment.chartColor]
+    this.legendUnemployment = [this.datasetUnemployment.histogramColor[0], this.datasetUnemployment.chartColor]
 
     this.datasetAverageSalary = this.datasetAverageSalaryTest
     this.datesAverageSalary = this.datesAverageSalaryTest

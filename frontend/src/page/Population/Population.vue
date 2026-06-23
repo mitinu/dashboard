@@ -44,7 +44,7 @@ export default {
   },
   data(){
     return{
-      title: "Движение населения",
+      title: "Движение численности населения",
       titleHeader: "Сводные данные",
 
       datesTest: [
@@ -74,10 +74,16 @@ export default {
 
 
       datasetPopulationTest: {
-        histogramColor: {
-          title: "прирост/убыток населения, чел.",
-          color: "#412467"
-        },
+        histogramColor: [
+          {
+            title: "прирост населения, чел.",
+            color: "#019dd8"
+          },
+          {
+            title: "убыток населения, чел.",
+            color: "#b62c2c"
+          }
+        ],
         histogram: {
           "22.09.25": 320,
           "22.12.25": 580,
@@ -143,11 +149,11 @@ export default {
         histogramColor: [
           {
             title: "прирост населения",
-            color: "#412467"
+            color: "#019dd8"
           },
           {
             title: "убыток населения",
-            color: "#b49cd0"
+            color: "#b62c2c"
           },
         ],
         histogram: {
@@ -185,11 +191,11 @@ export default {
         histogramColor: [
           {
             title: "прибытие населения",
-            color: "#412467"
+            color: "#019dd8"
           },
           {
             title: "убыток населения",
-            color: "#b49cd0"
+            color: "#b62c2c"
           },
         ],
         histogram: {
@@ -227,7 +233,7 @@ export default {
     this.dates = this.datesTest
 
     this.datasetPopulation = this.datasetPopulationTest
-    this.legendPopulation = [this.datasetPopulation.histogramColor, this.datasetPopulation.chartColor]
+    this.legendPopulation = [this.datasetPopulation.histogramColor[0], this.datasetPopulation.histogramColor[1], this.datasetPopulation.chartColor]
 
     this.datasetNaturalMovement = this.datasetNaturalMovementTest
     this.legendNaturalMovement = [this.datasetNaturalMovement.histogramColor[0], this.datasetNaturalMovement.histogramColor[1]]
