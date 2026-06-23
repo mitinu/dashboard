@@ -32,6 +32,7 @@ export default {
   background-color: #42425c;
   padding: 15px;
   border-radius: 100%;
+  cursor: pointer;
   svg{
     width: 25px;
     height: 25px;

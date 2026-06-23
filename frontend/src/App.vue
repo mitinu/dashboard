@@ -10,6 +10,7 @@
       <main-header
           :title="titleHeader"
           @switchVisibilityBurgerMenu="switchVisibilityBurgerMenu"
+          @exit="exit"
       />
       <div class="app__content">
         <burger-menu
@@ -65,6 +66,9 @@ export default {
     },
     switchVisibilityBurgerMenu(){
       this.visibilityBurgerMenu = !this.visibilityBurgerMenu
+    },
+    exit(){
+      this.authentication = false
     }
   }
 }

@@ -4,6 +4,7 @@
       <div class="container">
         <div>
           <menu-burger-horizontal-icon
+              class="cursor-pointer"
               @click.stop="switchVisibilityBurgerMenu"
               :color="themeStore.getColorText"
           />
@@ -17,7 +18,7 @@
 <!--              :color="themeStore.getColorText"-->
 <!--          />-->
 <!--        </div>-->
-        <div><button-exit/></div>
+        <div><button-exit @click.stop="exit"/></div>
       </div>
     </div>
   </header>
@@ -46,6 +47,9 @@ export default {
   methods:{
     switchVisibilityBurgerMenu(){
       this.$emit("switchVisibilityBurgerMenu")
+    },
+    exit(){
+      this.$emit("exit")
     }
   }
 }
@@ -70,6 +74,9 @@ export default {
       grid-auto-flow: column;
       gap: 30px;
       align-content: center;
+      .cursor-pointer{
+        cursor: pointer;
+      }
       .text{
         display: flex;
         align-items: center;
