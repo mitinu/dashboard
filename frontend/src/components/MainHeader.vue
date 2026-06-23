@@ -11,12 +11,12 @@
         <div class="title"><h3>{{title}}</h3></div>
       </div>
       <div class="container">
-        <div class="text">
-          <div><span>источники информации</span></div>
-          <arrow-down
-              :color="themeStore.getColorText"
-          />
-        </div>
+<!--        <div class="text">-->
+<!--          <div><span>источники информации</span></div>-->
+<!--          <arrow-down-->
+<!--              :color="themeStore.getColorText"-->
+<!--          />-->
+<!--        </div>-->
         <div><button-exit/></div>
       </div>
     </div>
