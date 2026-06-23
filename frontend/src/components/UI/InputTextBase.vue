@@ -1,6 +1,6 @@
 <template>
   <input
-      type="text"
+      :type="type"
       class="inputTextBase"
       :placeholder=placeholder
       :value="modelValue"
@@ -20,15 +20,10 @@ import { useThemeStore } from "@/stores/theme";
 export default{
   name:"inputTextBase",
   props:{
-    placeholder:{
-      type:String
-    },
-    modelValue:{
-      type: String
-    },
-    list:{
-      type: String
-    }
+    placeholder:{type:String},
+    modelValue:{type: String},
+    list:{type: String},
+    type:{type: String, default: "text"}
   },
   setup() {
     const themeStore = useThemeStore();

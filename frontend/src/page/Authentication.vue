@@ -10,10 +10,11 @@
         <span v-if="errors.login" class="error-text">{{ errors.login }}</span>
         <input-text-base
             placeholder="Пароль"
+            type="password"
             v-model=password
         />
         <span v-if="errors.password" class="error-text">{{ errors.password }}</span>
-        <a @click.stop="this.$emit('confirmationAuthentication')">Забыл(а) пароль</a>
+<!--        <a @click.stop="this.$emit('confirmationAuthentication')">Забыл(а) пароль</a>-->
       </div>
       <button-base value="Войти" @click.stop="authorization" />
     </div>
@@ -70,7 +71,12 @@ export default {
     },
     authorization(){
       if (this.validate()) {
-        this.$emit("confirmationAuthentication")
+        if(this.login=="admin"&&this.password=="admin1"){
+          this.$emit("confirmationAuthentication")
+        }
+        else{
+          this.errors.password = "неверный логин или пароль";
+        }
       }
     }
   }
