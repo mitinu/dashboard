@@ -10,7 +10,7 @@
         class="cell"
         v-for='idx in numberSteps * (dates.length + (gridPositions == "onGridLine" ? 1 : 0))'
         :key="idx"
-        :class="{ 'cell-small': isSmallCell(idx) }"
+        :class="{ 'cell-lower': isLowerCell(idx) }"
         :style="{
           borderLeft: verticalGrid,
         }"
@@ -54,6 +54,14 @@ export default {
       }
       return columns.join(' ');
     },
+    isLowerCell(idx){
+      if(idx>=this.numberSteps * (this.dates.length + 1)-this.dates.length ){
+        return true
+      }
+      else{
+        return false
+      }
+    },
     isSmallCell(idx) {
       // Определяем индекс колонки для ячейки (0-based)
       const totalColumns = this.dates.length + 1;
@@ -76,8 +84,8 @@ export default {
 
   .cell {
     border-top: 2px #363a45 dashed;
-    &-small{
-
+    &-lower{
+      border-bottom: 2px #363a45 dashed;
     }
   }
 

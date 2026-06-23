@@ -17,6 +17,9 @@
         <router-link class="menu-link" to="/population">
           <span class="link-text">Движение численности населения</span>
         </router-link>
+        <router-link class="menu-link" to="/finance">
+          <span class="link-text">Финансы</span>
+        </router-link>
       </div>
 
       <div class="footer">

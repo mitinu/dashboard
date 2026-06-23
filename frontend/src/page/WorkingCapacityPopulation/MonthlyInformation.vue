@@ -72,7 +72,7 @@ export default {
           "25.09.25": 1064,
         },
         histogramConfig:{},
-        histogramYAxisTitle:"чел",
+        histogramYAxisTitle:"человек",
         chartColor:{
           title: "уровень безработицы %",
           color: "#b49cd0"

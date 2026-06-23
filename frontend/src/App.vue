@@ -82,19 +82,20 @@ export default {
   background: linear-gradient(90deg, rgba(96, 96, 96, 0.3), rgba(96, 96, 96, 0.6), rgba(96, 96, 96, 0.3));
 }
 h1{
-  font-size: 26pt;
-}
-h2{
   font-size: 22pt;
 }
-h3{
+h2{
   font-size: 18pt;
 }
-h4{
+h3{
   font-size: 16pt;
+}
+h4{
+  font-size: 14pt;
 }
 span{
   white-space: pre-line;
+  font-size: 12pt;
 }
 .mt20{
   margin-top: 20px;

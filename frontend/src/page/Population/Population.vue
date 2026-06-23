@@ -109,7 +109,7 @@ export default {
           "27.09.25": 560,
         },
         histogramConfig: {},
-        histogramYAxisTitle: "чел",
+        histogramYAxisTitle: "прирост",
         chartColor: {
           title: "численность населения, чел.",
           color: "#b49cd0"
@@ -139,7 +139,7 @@ export default {
           "27.09.25": 554690,  // +560
         },
         chartConfig: {},
-        chartYAxisTitle: "человек"
+        chartYAxisTitle: "количество"
       },
 
       datasetPopulation: {},

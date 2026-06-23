@@ -29,8 +29,8 @@ export default {
     display: flex;
     gap: 10px;
     .color{
-      width: 25px;
-      height: 25px;
+      width: 23px;
+      height: 23px;
       border-radius: 100%;
     }
   }

@@ -5,6 +5,7 @@ import operationalInformation from "@/page/OperationalInformation/OperationalInf
 import registration from "@/page/Registration.vue";
 import users from "@/page/Users/Users.vue"
 import population from "@/page/Population/Population.vue"
+import finance from "@/page/Finance/Finance.vue";
 
 const routes = [
     {
@@ -36,6 +37,11 @@ const routes = [
         path: '/population',
         name: 'population',
         component: population,
+    },
+    {
+        path: '/finance',
+        name: 'finance',
+        component: finance,
     },
 ]
 

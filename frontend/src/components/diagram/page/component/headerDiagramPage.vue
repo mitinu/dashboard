@@ -27,8 +27,8 @@ export default {
 <style scoped>
 .header{
   display: flex;
-  gap: 10%;
+  gap: 50px;
   margin-bottom: 40px;
-  height: 40px;
+  height: 50px;
 }
 </style>
