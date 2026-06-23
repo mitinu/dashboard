@@ -6,7 +6,7 @@
     />
     <div class="body">
       <div class="container">
-        <div><span>сообщение граждан</span></div>
+        <div><h4>сообщение граждан</h4></div>
         <div>
           <countMessage
               :color="themeStore.getColorText"

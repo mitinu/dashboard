@@ -93,7 +93,7 @@ export default {
           "25.09.25": 0.32,
         },
         chartConfig:{},
-        chartYAxisTitle:"%"
+        chartYAxisTitle:"процент"
 
       },
       datesUnemploymentTest: [

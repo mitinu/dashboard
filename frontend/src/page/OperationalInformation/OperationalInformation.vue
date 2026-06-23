@@ -23,7 +23,7 @@ export default {
   },
   data(){
     return{
-      title: "Оперативные сведения",
+      title: "Обращение граждан",
       titleHeader: "Сводные данные",
 
       dataAppealTest: {
@@ -45,7 +45,7 @@ export default {
           },
           KeyIsTag5: {
             key: "KeyIsTag5",
-            title: "Тег 5",
+            title: "Социальная сфера",
             value: 30
           },
           HCS: {
@@ -55,7 +55,7 @@ export default {
           },
           KeyIsTag4: {
             key: "KeyIsTag4",
-            title: "Тег 4",
+            title: "Благоустройство",
             value: 100
           }
         },

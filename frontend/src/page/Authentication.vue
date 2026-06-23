@@ -71,7 +71,7 @@ export default {
     },
     authorization(){
       if (this.validate()) {
-        if(this.login=="admin"&&this.password=="admin1"){
+        if(this.login=="superadmin"&&this.password=="superadmin"){
           this.$emit("confirmationAuthentication")
         }
         else{

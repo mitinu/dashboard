@@ -9,7 +9,7 @@
           <span class="link-text">Пользователи</span>
         </router-link>
         <router-link class="menu-link" to="/operationalInformation">
-          <span class="link-text">Оперативные сведения</span>
+          <span class="link-text">Обращение граждан</span>
         </router-link>
         <router-link class="menu-link" to="/monthlyInformation">
           <span class="link-text">Социально экономические данные</span>
@@ -23,11 +23,13 @@
       </div>
 
       <div class="footer">
-        <gears
-            class="iconGears"
-            @click.stop="openModalWindow"
-            :color="themeStore.getColorText"
-        />
+        <theme-toggle @change="themeToggle"/>
+
+<!--        <gears-->
+<!--            class="iconGears"-->
+<!--            @click.stop="openModalWindow"-->
+<!--            :color="themeStore.getColorText"-->
+<!--        />-->
       </div>
 
     </div>
@@ -48,10 +50,12 @@ import modalWindow from "@/components/modalWindow/ModalWindow.vue";
 import setting from "@/page/Setting/Setting.vue";
 import mixinModalWindow from "@/components/modalWindow/mixinModalWindow.vue";
 import { useThemeStore } from "@/stores/theme";
+import themeToggle from "@/components/UI/ThemeToggle.vue";
 
 export default {
   name: "BurgerMenu",
   components: {
+    themeToggle,
     setting,
     modalWindow,
     Gears,
@@ -77,7 +81,23 @@ export default {
         '--menu-text': this.themeStore.getColorText,
       };
     }
-  }
+  },
+  methods:{
+    themeToggle(event) {
+      const store = useThemeStore();
+      if (event.target.checked) {
+        store.setBackgroundMain("#0b0b10");
+        store.setColorText("#F0F8FFFF");
+        store.setColor3("#171620");
+        store.setColor4("#2f2f40");
+      } else {
+        store.setBackgroundMain("#F0F8FFFF");
+        store.setColorText("#0b0b10");
+        store.setColor3("#E8E6F5");
+        store.setColor4("#D0D0E0");
+      }
+    }
+  },
 }
 // TODO добавить скрол в случи когда список страничек будет велик
 </script>
