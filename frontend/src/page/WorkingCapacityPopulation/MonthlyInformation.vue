@@ -17,7 +17,7 @@
       />
     </div>
     <div class="content CPI" :style="{backgroundColor: themeStore.getColor3}">
-      <fourChartPage
+      <chartsPage
           title="Индекс потребительских цен к соответствующим кварталам прошлых лет, %"
           :dataset="datasetCPI"
           :dates="datesCPI"
@@ -30,7 +30,7 @@
 <script>
 import histogramAndChartPage from "@/components/diagram/page/HistogramAndChartPage.vue";
 import chartPage from "@/components/diagram/page/chartPage.vue";
-import fourChartPage from "@/components/diagram/page/FourChartPage.vue";
+import chartsPage from "@/components/diagram/page/ChartsPage.vue";
 import { useThemeStore } from "@/stores/theme";
 
 export default {
@@ -38,7 +38,7 @@ export default {
   components:{
     histogramAndChartPage,
     chartPage,
-    fourChartPage
+    chartsPage
   },
   setup() {
     const themeStore = useThemeStore();
@@ -46,7 +46,7 @@ export default {
   },
   data(){
     return{
-      title: "Экономические данные",
+      title: "Социально экономические данные",
       titleHeader: "Сводные данные",
 
       datasetUnemploymentTest: {
@@ -141,82 +141,86 @@ export default {
       legendAverageSalary: [],
 
       datasetCPITest: {
-        chart1Color:{
-          title: "2022",
-          color: "#b49cd0",
-        },
-        chart1: {
-          "сен 22": 112,
-          "дек 22": 108,
-          "мар 23": 105,
-          "июн 23": 102,
-          "сен 23": 101,
-          "дек 23": 100,
-          "мар 24": 104,
-          "июн 24": 107,
-          "сен 24": 110,
-          "дек 24": 115,
-          "мар 25": 120,
-          "июн 25": 125,
-          "сен 25": 130,
-        },
-        chart2Color:{
-          title: "2023",
-          color: "#6ba5c0",
-        },
-        chart2: {
-          "сен 22": 145,
-          "дек 22": 142,
-          "мар 23": 138,
-          "июн 23": 135,
-          "сен 23": 132,
-          "дек 23": 130,
-          "мар 24": 128,
-          "июн 24": 132,
-          "сен 24": 138,
-          "дек 24": 144,
-          "мар 25": 150,
-          "июн 25": 155,
-          "сен 25": 160,
-        },
-        chart3Color:{
-          title: "2024",
-          color: "#e8a735",
-        },
-        chart3: {
-          "сен 22": 128,
-          "дек 22": 125,
-          "мар 23": 122,
-          "июн 23": 118,
-          "сен 23": 115,
-          "дек 23": 112,
-          "мар 24": 118,
-          "июн 24": 125,
-          "сен 24": 132,
-          "дек 24": 138,
-          "мар 25": 142,
-          "июн 25": 148,
-          "сен 25": 152,
-        },
-        chart4Color:{
-          title: "2025",
-          color: "#e87c6b",
-        },
-        chart4: {
-          "сен 22": 105,
-          "дек 22": 110,
-          "мар 23": 115,
-          "июн 23": 120,
-          "сен 23": 125,
-          "дек 23": 130,
-          "мар 24": 135,
-          "июн 24": 140,
-          "сен 24": 152,
-          "дек 24": 145,
-          "мар 25": 150,
-          "июн 25": 155,
-          "сен 25": 158,
-        },
+        chartsColor:[
+          {
+            title: "2022",
+            color: "#b49cd0",
+          },
+          {
+            title: "2023",
+            color: "#6ba5c0",
+          },
+          {
+            title: "2024",
+            color: "#e8a735",
+          },
+          {
+            title: "2025",
+            color: "#e87c6b",
+          },
+        ],
+        charts:[
+          {
+            "сен 22": 112,
+            "дек 22": 108,
+            "мар 23": 105,
+            "июн 23": 102,
+            "сен 23": 101,
+            "дек 23": 100,
+            "мар 24": 104,
+            "июн 24": 107,
+            "сен 24": 110,
+            "дек 24": 115,
+            "мар 25": 120,
+            "июн 25": 125,
+            "сен 25": 130,
+          },
+          {
+            "сен 22": 145,
+            "дек 22": 142,
+            "мар 23": 138,
+            "июн 23": 135,
+            "сен 23": 132,
+            "дек 23": 130,
+            "мар 24": 128,
+            "июн 24": 132,
+            "сен 24": 138,
+            "дек 24": 144,
+            "мар 25": 150,
+            "июн 25": 155,
+            "сен 25": 160,
+          },
+          {
+            "сен 22": 128,
+            "дек 22": 125,
+            "мар 23": 122,
+            "июн 23": 118,
+            "сен 23": 115,
+            "дек 23": 112,
+            "мар 24": 118,
+            "июн 24": 125,
+            "сен 24": 132,
+            "дек 24": 138,
+            "мар 25": 142,
+            "июн 25": 148,
+            "сен 25": 152,
+          },
+          {
+            "сен 22": 105,
+            "дек 22": 110,
+            "мар 23": 115,
+            "июн 23": 120,
+            "сен 23": 125,
+            "дек 23": 130,
+            "мар 24": 135,
+            "июн 24": 140,
+            "сен 24": 152,
+            "дек 24": 145,
+            "мар 25": 150,
+            "июн 25": 155,
+            "сен 25": 158,
+          },
+        ],
         chartConfig:{},
       },
       datesCPITest: [
@@ -246,7 +250,7 @@ export default {
 
     this.datasetCPI = this.datasetCPITest
     this.datesCPI = this.datesCPITest
-    this.legendCPI = [this.datasetCPI.chart1Color, this.datasetCPI.chart2Color, this.datasetCPI.chart3Color, this.datasetCPI.chart4Color]
+    this.legendCPI = [this.datasetCPI.chartsColor[0], this.datasetCPI.chartsColor[1], this.datasetCPI.chartsColor[2], this.datasetCPI.chartsColor[3]]
   },
   mounted() {
     this.$emit("setTitleMain", "")

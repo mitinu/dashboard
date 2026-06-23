@@ -16,46 +16,18 @@
           gridPositions="onGridLine"
           verticalGrid="none"
       />
-      <chart
-          v-if="dataset.chart1"
-          :minValue="rangeBoundariesChart.minBorder"
-          :maxValue="rangeBoundariesChart.maxBorder"
-          :dataset="dataset.chart1"
-          :dates="dates"
-          :color="dataset.chart1Color.color"
-          :widthColum="widthColum"
-          :config="dataset.chartConfig"
-      />
-      <chart
-          v-if="dataset.chart2"
-          :minValue="rangeBoundariesChart.minBorder"
-          :maxValue="rangeBoundariesChart.maxBorder"
-          :dataset="dataset.chart2"
-          :dates="dates"
-          :color="dataset.chart2Color.color"
-          :widthColum="widthColum"
-          :config="dataset.chartConfig"
-      />
-      <chart
-          v-if="dataset.chart3"
-          :minValue="rangeBoundariesChart.minBorder"
-          :maxValue="rangeBoundariesChart.maxBorder"
-          :dataset="dataset.chart3"
-          :dates="dates"
-          :color="dataset.chart3Color.color"
-          :widthColum="widthColum"
-          :config="dataset.chartConfig"
-      />
-      <chart
-          v-if="dataset.chart4"
-          :minValue="rangeBoundariesChart.minBorder"
-          :maxValue="rangeBoundariesChart.maxBorder"
-          :dataset="dataset.chart4"
-          :dates="dates"
-          :color="dataset.chart4Color.color"
-          :widthColum="widthColum"
-          :config="dataset.chartConfig"
-      />
+      <template v-for="(chart, idx) in dataset.charts">
+        <chart
+            v-if="chart"
+            :minValue="rangeBoundariesChart.minBorder"
+            :maxValue="rangeBoundariesChart.maxBorder"
+            :dataset="chart"
+            :dates="dates"
+            :color="dataset.chartsColor[idx].color"
+            :widthColum="widthColum"
+            :config="dataset.chartConfig"
+        />
+      </template>
     </axesFrame>
   </div>
 </template>
@@ -102,13 +74,13 @@ export default {
     rangeBoundariesChart(){
 
 
-      let maxBorder = ((obj = this.dataset.chart1) => {for (const key in obj) return obj[key];})();
-      let minBorder = ((obj = this.dataset.chart1) => {for (const key in obj) return obj[key];})();
+      let maxBorder = ((obj = this.dataset.charts[0]) => {for (const key in obj) return obj[key];})();
+      let minBorder = ((obj = this.dataset.charts[0]) => {for (const key in obj) return obj[key];})();
 
 
 
-      maxBorder = this.roundingUp(maxBorder, 1, 2, { ...this.dataset.chart1, ...this.dataset.chart2, ...this.dataset.chart3, ...this.dataset.chart4 }, 1.1);
-      minBorder = this.roundingUp(minBorder, -1, 1, { ...this.dataset.chart1, ...this.dataset.chart2, ...this.dataset.chart3, ...this.dataset.chart4 }, 1.1);
+      maxBorder = this.roundingUp(maxBorder, 1, 2, this.dataset.charts, 1.1);
+      minBorder = this.roundingUp(minBorder, -1, 1, this.dataset.charts, 1.2);
 
 
       let displayedRange = this.searchRange(maxBorder, minBorder)
@@ -189,12 +161,14 @@ export default {
     /**
      * bigWay = 1; -1
      * */
-    roundingUp(startValue, bigWay, charactersBeforeRounding, arr, roundingFactor = 1.0){
+    roundingUp(startValue, bigWay, charactersBeforeRounding, arrs, roundingFactor = 1.0){
       let thisValue = startValue
-      for (const idx in arr){
-        const value = arr[idx]
-        if (thisValue*bigWay<value*bigWay){
-          thisValue=value
+      for (const arr of arrs) {
+        for (const idx in arr){
+          const value = arr[idx]
+          if (thisValue*bigWay<value*bigWay){
+            thisValue=value
+          }
         }
       }
       if(bigWay==1){

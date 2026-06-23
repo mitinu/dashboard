@@ -12,7 +12,7 @@
           <span class="link-text">Оперативные сведения</span>
         </router-link>
         <router-link class="menu-link" to="/monthlyInformation">
-          <span class="link-text">Экономические данные</span>
+          <span class="link-text">Социально экономические данные</span>
         </router-link>
         <router-link class="menu-link" to="/population">
           <span class="link-text">Движение численности населения</span>
